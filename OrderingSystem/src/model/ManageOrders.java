@@ -32,5 +32,17 @@ public class ManageOrders {
 	public ArrayList<Order> getOrders(){
 		return orders;
 	}
+	
+	public String updateOrder(String orderId, Integer amount){
+		orders.forEach(i -> {
+			if(orderId.equals(i.getOrderId())){
+				order = i;
+				order.setAmount(amount);
+			}
+			else
+				order = null;
+		});
+		return order.getOrderId();
+	}
 
 }

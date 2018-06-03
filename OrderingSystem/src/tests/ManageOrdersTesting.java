@@ -13,6 +13,7 @@ public class ManageOrdersTesting {
 
 	protected ManageOrders mOrder = new ManageOrders();
 	protected Integer amount = 5;
+	protected Integer updatedAmount = 10;
 	protected String ref = mOrder.setOrder(amount);
 
 	@Test
@@ -35,4 +36,11 @@ public class ManageOrdersTesting {
 		assertTrue(mOrder.getOrders().contains(mOrder.getOrder(ref)));
 	}
 
+	@Test
+	public void updateOrderTest(){
+		mOrder.updateOrder(ref, updatedAmount);
+		assertEquals(mOrder.getOrder(ref).getAmount(), updatedAmount);
+		assertTrue(mOrder.updateOrder(ref, updatedAmount) instanceof String);
+	}
+	
 }
