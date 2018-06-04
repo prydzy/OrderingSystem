@@ -10,7 +10,7 @@ public class ManageOrders {
 	private Order order = new Order();
 	private ArrayList<Order> orders = new ArrayList<Order>();
 	private Boolean valid = true;
-	
+
 	public String setOrder(Integer amount){
 		String orderId = UUID.randomUUID().toString();
 		order.setAmount(amount);
@@ -33,19 +33,28 @@ public class ManageOrders {
 	public ArrayList<Order> getOrders(){
 		return orders;
 	}
-	
+
 	public String updateOrder(String orderId, Integer amount){
 		orders.forEach(i -> {
-			if(orderId.equals(i.getOrderId())){
+			if(orderId.equals(i.getOrderId()) && i.getDispatched() == false){
 				order = i;
 				order.setAmount(amount);
+			}
+			else if(orderId.equals(i.getOrderId()) && i.getDispatched() == true){
+				valid = false;
 			}
 			else
 				order = null;
 		});
+
+		if(valid.equals(false)){
+			return "400 bad request";
+		} else if (order == null){
+			return null;
+		}
 		return order.getOrderId();
 	}
-	
+
 	public String markDispatched(String orderId){
 		orders.forEach(i -> {
 			if(orderId.equals(i.getOrderId()) && valid.equals(true)){
@@ -60,5 +69,4 @@ public class ManageOrders {
 		}
 		return "Order Updated";
 	}
-
 }

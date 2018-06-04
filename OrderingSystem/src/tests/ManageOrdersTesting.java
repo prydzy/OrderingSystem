@@ -41,6 +41,18 @@ public class ManageOrdersTesting {
 		mOrder.updateOrder(ref, updatedAmount);
 		assertEquals(mOrder.getOrder(ref).getAmount(), updatedAmount);
 		assertTrue(mOrder.updateOrder(ref, updatedAmount) instanceof String);
+		assertEquals(mOrder.updateOrder("test", updatedAmount), null);
+
+		mOrder.markDispatched(ref);
+		assertEquals(mOrder.updateOrder(ref, updatedAmount), "400 bad request");
 	}
-	
+
+	@Test
+	public void markDispatchedTest(){
+		mOrder.markDispatched(ref);
+		assertEquals(mOrder.getOrder(ref).getDispatched(), true);
+		assertEquals(mOrder.markDispatched(ref), "Order Updated");
+		assertEquals(mOrder.markDispatched("test"), "400 bad request");
+	}
+
 }
