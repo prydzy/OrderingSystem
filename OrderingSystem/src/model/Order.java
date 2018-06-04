@@ -4,7 +4,8 @@ public class Order {
 
 	private Integer amount;
 	private String orderId;
-
+	private Boolean dispatched = false;
+	
 	public Order(){
 	}
 
@@ -29,4 +30,12 @@ public class Order {
 		this.orderId = orderId;
 	}
 
+	public Boolean getDispatched(){
+		return dispatched;
+	}
+
+	public void setDispatched(Boolean disp){
+		this.dispatched = disp;
+	}
+	
 }
